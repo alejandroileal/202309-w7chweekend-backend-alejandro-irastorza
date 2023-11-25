@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import createDebug from 'debug';
 import { User } from '../entities/user.js';
-// Import { HttpError } from '../types/http.error.js';
+import { HttpError } from '../types/http.error.js';
 const debug = createDebug('KB:auth');
 
 debug('Imported');
@@ -15,6 +15,7 @@ export type TokenPayload = {
 
 export abstract class Auth {
   static secret = process.env.JWT_SECRET;
+
   static hash(value: string): Promise<string> {
     const saltRound = 10;
     return hash(value, saltRound);
