@@ -4,6 +4,7 @@ import morgan from 'morgan';
 // Import { tasksRouter } from './routers/tasks.router.js';
 // import { notesRouter } from './routers/notes.router.js';
 import createDebug from 'debug';
+import { usersRouter } from './routers/users.router.js';
 
 // Import { errorMiddleware } from './middleware/error.middleware.js';
 // import { usersRouter } from './routers/users.router.js';
@@ -19,8 +20,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.static('public'));
 
-// App.use('/tasks', tasksRouter);
-// app.use('/notes', notesRouter);
-// app.use('/users', usersRouter);
+app.use('/users', usersRouter);
 
-// app.use(errorMiddleware);
+// App.use(errorMiddleware);
