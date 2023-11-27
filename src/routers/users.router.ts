@@ -31,13 +31,13 @@ usersRouter.post(
 usersRouter.post('/login', controller.login.bind(controller)); // Se mantiene con libre acceso
 
 usersRouter.patch(
-  './add/friend/:id',
+  './add-friend/:id',
   interceptor.authorization.bind(interceptor),
   controller.addFriend.bind(controller)
 );
 
 usersRouter.patch(
-  './add/enemy/:id',
+  './add-enemy/:id',
   interceptor.authorization.bind(interceptor),
   controller.addEnemy.bind(controller)
 );
@@ -51,28 +51,22 @@ usersRouter.patch(
 );
 
 usersRouter.delete(
-  '/id:',
+  '/:id',
   interceptor.authorization.bind(interceptor),
   interceptor.authentication.bind(interceptor),
   controller.delete.bind(controller)
 );
 
 usersRouter.patch(
-  '/remove/friend/id:',
+  '/remove-friend/:id',
   interceptor.authorization.bind(interceptor),
   controller.removeFriend.bind(controller)
 );
 
 usersRouter.patch(
-  '/remove/enemy/id:',
+  '/remove-enemy/:id',
   interceptor.authorization.bind(interceptor),
   controller.removeFriend.bind(controller)
 );
 
 usersRouter.get('/:id', controller.getById.bind(controller));
-
-usersRouter.patch(
-  '/login',
-  interceptor.authorization.bind(interceptor),
-  controller.login.bind(controller)
-);
