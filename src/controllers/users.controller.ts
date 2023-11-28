@@ -4,6 +4,7 @@ import { UsersMongoRepo } from '../repos/users.mongo.repo.js';
 import { Auth } from '../services/auth.js';
 import { User } from '../entities/user.js';
 import { Controller } from './controller.js';
+import { HttpError } from '../types/http.error.js';
 
 const debug = createDebug('KB:users:controller');
 
@@ -29,6 +30,20 @@ export class UsersController extends Controller<User> {
       res.status(202);
       res.statusMessage = 'Accepted';
       res.json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async create(req: Request, res: Response, next: NextFunction) {
+    try {
+      if (!req.file) {
+        throw new HttpError(406, 'Not Acceptable', 'Invalid multer file');
+      }
+
+      const imgData = await this.cloudinaryService.uploadImage(req.file.path);
+      req.body.profilePicture = imgData;
+      super.create(req, res, next);
     } catch (error) {
       next(error);
     }

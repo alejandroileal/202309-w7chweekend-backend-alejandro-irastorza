@@ -5,6 +5,8 @@ const usersSchema = new Schema<User>({
   profilePicture: {
     publicId: String,
     size: Number,
+    height: Number,
+    width: Number,
     format: String,
     url: String,
   },
