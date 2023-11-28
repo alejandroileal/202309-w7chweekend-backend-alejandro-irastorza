@@ -4,7 +4,6 @@ import createDebug from 'debug';
 import { UsersMongoRepo } from '../repos/users.mongo.repo.js';
 import { AuthInterceptor } from '../middleware/auth.interceptor.js';
 import { FileInterceptor } from '../middleware/file.interceptor.js';
-// Import { AuthInterceptor } from '../middleware/auth.interceptor.js';
 
 const debug = createDebug('KB:users:router');
 
@@ -24,20 +23,20 @@ usersRouter.get(
 
 usersRouter.post(
   '/register',
-  fileInterceptor.singleFileStore('profile-picture').bind(fileInterceptor),
+  fileInterceptor.singleFileStore('profilePicture').bind(fileInterceptor),
   controller.create.bind(controller)
 ); // Se mantiene con libre acceso
 
 usersRouter.post('/login', controller.login.bind(controller)); // Se mantiene con libre acceso
 
 usersRouter.patch(
-  './add-friend/:id',
+  '/add-friend/:id',
   interceptor.authorization.bind(interceptor),
   controller.addFriend.bind(controller)
 );
 
 usersRouter.patch(
-  './add-enemy/:id',
+  '/add-enemy/:id',
   interceptor.authorization.bind(interceptor),
   controller.addEnemy.bind(controller)
 );
