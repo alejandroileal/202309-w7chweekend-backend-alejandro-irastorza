@@ -59,6 +59,12 @@ export class UsersMongoRepo implements Repository<User> {
     friendId: User['id'],
     currentUserId: User['id']
   ): Promise<User> {
+    // TEMPORAL
+    debug('CurrentUserId:', currentUserId);
+    debug('friendId:', friendId);
+
+    //
+
     // Buscando el usuario logeado
     const currentUser = await UserModel.findById(currentUserId).exec();
 
