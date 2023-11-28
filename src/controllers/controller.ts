@@ -1,6 +1,9 @@
 /* eslint-disable no-useless-constructor */
 import { Repository } from '../repos/repo';
 import { NextFunction, Request, Response } from 'express';
+import createDebug from 'debug';
+
+const debug = createDebug('KB:users:mongo:repo');
 
 export abstract class Controller<T extends { id: unknown }> {
   // eslint-disable-next-line no-unused-vars
@@ -69,7 +72,10 @@ export abstract class Controller<T extends { id: unknown }> {
 
   async addFriend(req: Request, res: Response, next: NextFunction) {
     try {
+      debug('Parámetros:', req.params.id, req.body.id);
+
       const result = await this.repo.addFriend(req.params.id, req.body.id);
+
       res.json(result);
     } catch (error) {
       next(error);
