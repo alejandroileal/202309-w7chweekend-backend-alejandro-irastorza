@@ -2,6 +2,12 @@ import { Schema, model } from 'mongoose';
 import { User } from '../entities/user.js';
 
 const usersSchema = new Schema<User>({
+  profilePicture: {
+    publicId: String,
+    size: Number,
+    format: String,
+    url: String,
+  },
   userName: {
     type: String,
     required: true,
@@ -14,8 +20,18 @@ const usersSchema = new Schema<User>({
   age: Number,
   kittyName: String,
   ownerName: String,
-  friends: Array,
-  enemies: Array,
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+  enemies: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
 });
 
 usersSchema.set('toJSON', {
